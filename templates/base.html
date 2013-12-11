@@ -1,0 +1,33 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{title}}</title>
+    {% else %}
+    <title>Paper Browser</title>
+    {% endif %}
+  </head>
+
+  <body>
+
+    <!-- Top Navbar -->
+    <div id="navbar">
+      <a href="{{ url_for('index') }}">Home</a> | 
+      Add Paper
+    </div>
+    <hr />
+
+    <!-- Left Directory pane -->
+    <div id="dirpane">
+      <ul>
+        {% for cat in cats %}
+        <li><a href="{{ url_for('index') + '?cat=' + cat }}">{{cat}}</a></li>
+	{% endfor %}
+	<li><a href="{{ url_for('index') + '?cat=_all' }}">View All</a></li>
+      </ul>
+    </div>
+    <hr />
+
+    {% block content %}
+    {% endblock %}
+  </body>
+</html>

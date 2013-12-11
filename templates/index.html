@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+{% if papers %}
+  <table border=1>
+    <tr>
+      <th width=300>Title</th>
+      <th width=300>Authors</th>
+      <th width=60>Year</th>
+    </tr>
+  {% for paper in papers %}
+    <tr>
+      <td><a href="{{url_for('static', filename='papers/'+paper.path)}}">{{paper.title}}</a></td>
+      <td>{{", ".join(paper.authors)}}</td>
+      <td>{{paper.year}}</td>
+    </tr>
+  {% endfor %}
+  </table>
+{% else %}
+<p>No papers found.</p>
+{% endif %}
+{% endblock %}
