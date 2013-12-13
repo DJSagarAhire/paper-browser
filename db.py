@@ -1,10 +1,11 @@
 import sqlite3
+import os
 
 def get_papers(cat="_all"):
     """ Returns a list of dicts for all papers in database
     """
 
-    conn = sqlite3.connect("data/paper-browser.db")
+    conn = sqlite3.connect(get_db_path())
     cur = conn.cursor()
 
     if cat != "_all":
@@ -33,7 +34,7 @@ def add_paper(paper):
     """ Accepts a paper as a list and adds it to the database
     """
 
-    conn = sqlite3.connect("data/paper-browser.db")
+    conn = sqlite3.connect(get_db_path())
     cur = conn.cursor()
 
     cur.execute("""insert into papers (title, authors, year, category, keywords, path, notes, important)
@@ -46,7 +47,7 @@ def get_cats():
     """ Returns a list of all categories in database
     """
 
-    conn = sqlite3.connect("data/paper-browser.db")
+    conn = sqlite3.connect(get_db_path())
     cur = conn.cursor()
 
     cur.execute("select distinct category from papers")
@@ -58,3 +59,7 @@ def get_list(string):
     """ Accepts a string having comma-separated values and returns a list of those values
     """
     return [val.strip() for val in string.split(",")]
+
+def get_db_path():
+    currpath = os.path.dirname(os.path.realpath(__file__))
+    return currpath + "/data/paper-browser.db"

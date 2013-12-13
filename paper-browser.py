@@ -73,7 +73,7 @@ def add():
             return render_template("add.html", cats=cat_list, title="Add Paper", error=error)
 
         filename = "{0}{1}".format(time.time(), os.path.splitext(upfile.filename)[1])
-        filepath = "static/papers/{0}".format(filename)
+        filepath = "{0}/{1}".format(get_papers_path(), filename)
         upfile.save(filepath)
 
         # Now actually add paper
@@ -95,6 +95,10 @@ def comma_list(string):
     """ Accepts a comma-separated string which may contain several embedded spaces, and converts it to a standard comma-separated string
     """
     return ",".join([s.strip() for s in string.split(",")])
+
+def get_papers_path():
+    currpath = os.path.dirname(os.path.realpath(__file__))
+    return currpath + "/static/papers"
 
 if __name__ == "__main__":
     app.run(debug=True)
