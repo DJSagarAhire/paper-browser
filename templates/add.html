@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+{% if error %}
+<p style="color:red">{{error}}</p>
+{% endif %}
+Add a paper:
+<form method="post" action="{{ url_for('add') }}" enctype="multipart/form-data">
+<table width=100%>
+  <tr> <td width=30%>Title</td><td width=70%><input type="text" name="title" /></td> </tr>
+  <tr> <td>Authors (Separate by commas)</td><td><input type="text" name="authors" /></td> </tr>
+  <tr> <td>Year</td><td><input type="number" min="1940" max="2015" name="year" /></td> </tr>
+  <tr> <td>Select Directoy</td>
+    <td>
+      <select name="cat_sel">
+	{% for cat in cats %}
+	<option value="{{cat}}">{{cat}}</option>
+	{% endfor %}
+	<option value="_other">Other</option>
+      </select>
+    </td>
+  </tr>
+  <tr> <td>Or enter it yourself (Use path-like syntax separated by "/")</td><td><input type="text" name="cat_text" /></td> </tr>
+  <tr> <td>Keywords (Separate by commas)</td><td><input type="text" name="keywords" /></td> </tr>
+  <tr> <td>Notes</td><td><textarea rows="3" name="notes"></textarea></td> </tr>
+  <tr> <td>Important?</td><td><input type="checkbox" name="important" /></td> </tr>
+  <tr> <td>Upload Paper</td><td><input type="file" name="file"></td> </tr>
+  <tr> <td><input type="submit" value="Add" /></td><td><input type="reset" value="Clear"></td> </tr>
+</table>
+</form>
+{% endblock %}

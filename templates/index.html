@@ -1,17 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
 {% if papers %}
-  <table border=1>
+  <table id="papertable" border=1 width=80%>
     <tr>
-      <th width=300>Title</th>
-      <th width=300>Authors</th>
-      <th width=60>Year</th>
+      <th width=25%>Title</th>
+      <th width=25%>Authors</th>
+      <th width=10%>Year</th>
+      <th width=35%>Notes</th>
     </tr>
   {% for paper in papers %}
     <tr>
       <td><a href="{{url_for('static', filename='papers/'+paper.path)}}">{{paper.title}}</a></td>
       <td>{{", ".join(paper.authors)}}</td>
       <td>{{paper.year}}</td>
+      <td>{{paper.notes}}</td>
     </tr>
   {% endfor %}
   </table>

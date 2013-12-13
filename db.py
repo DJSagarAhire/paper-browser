@@ -23,10 +23,24 @@ def get_papers(cat="_all"):
         paper_dict["category"] = row[4]
         paper_dict["keywords"] = get_list(row[5])
         paper_dict["path"] = row[6]
+        paper_dict["notes"] = row[7]
 
         paper_list.append(paper_dict)
 
     return paper_list
+
+def add_paper(paper):
+    """ Accepts a paper as a list and adds it to the database
+    """
+
+    conn = sqlite3.connect("data/paper-browser.db")
+    cur = conn.cursor()
+
+    cur.execute("""insert into papers (title, authors, year, category, keywords, path, notes, important)
+values (?, ?, ?, ?, ?, ?, ?, ?)""", paper)
+
+    conn.commit()
+    conn.close()
 
 def get_cats():
     """ Returns a list of all categories in database
