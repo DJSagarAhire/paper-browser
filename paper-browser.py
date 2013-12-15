@@ -1,12 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for
-from db import get_papers, get_cats, add_paper
+from db import get_papers, get_cats, add_paper, del_paper
 import time
 import os.path
 
 app = Flask(__name__)
 
 @app.route("/")
-@app.route("/index")
+@app.route("/view")
 def index():
     """ Serves the index page. Here, the user can:
     1: View lists of papers of a particular directory
@@ -84,6 +84,16 @@ def add():
 
     else:
         return render_template("add.html", cats=cat_list, title="Add Paper")
+
+@app.route("/delete")
+def delete():
+    paperid = request.args.get("paperid")
+    filename = del_paper(paperid)
+
+    filepath = "{0}/{1}".format(get_papers_path(), filename)
+    os.remove(filepath)
+
+    return redirect(url_for("index"))
 
 ##############################
 # Utility functions

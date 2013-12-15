@@ -3,10 +3,11 @@
 {% if papers %}
   <table id="papertable" border=1 width=80%>
     <tr>
-      <th width=25%>Title</th>
-      <th width=25%>Authors</th>
+      <th width=22%>Title</th>
+      <th width=22%>Authors</th>
       <th width=10%>Year</th>
       <th width=35%>Notes</th>
+      <th width=6%>Actions</th>
     </tr>
   {% for paper in papers %}
     <tr>
@@ -14,6 +15,10 @@
       <td>{{", ".join(paper.authors)}}</td>
       <td>{{paper.year}}</td>
       <td>{{paper.notes}}</td>
+      <td align="center">
+	<img src="{{url_for('static', filename='images/Edit.png')}}" width=24 height=24 /> 
+	<a href="{{url_for('delete')}}?paperid={{paper.paperid}}"><img src="{{url_for('static', filename='images/Delete.png')}}"  width=24 height=24 onclick="return confirm('Are you sure you want to delete the paper? This action cannot be undone.')" />
+      </td>
     </tr>
   {% endfor %}
   </table>

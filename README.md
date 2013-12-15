@@ -18,10 +18,10 @@ Implemented Features:
   * Indication of whether the paper is "important" (depending on your definition of "important")
 * Categorization of papers by directory
 * Viewing of papers in browser, including very (!) rudimentary directory navigation
+* Deletion of papers
 
 Pending features:
 * Search of papers by title or metadata
-* Deletion of papers
 * UI enhancement using CSS
 
 Information about flask can be on the [flask website](http://flask.pocoo.org/).

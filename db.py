@@ -43,6 +43,23 @@ values (?, ?, ?, ?, ?, ?, ?, ?)""", paper)
     conn.commit()
     conn.close()
 
+def del_paper(paperid):
+    """ Removes paper with specified paperid from database
+    Also returns path to file containing the paper
+    """
+
+    conn = sqlite3.connect(get_db_path())
+    cur = conn.cursor()
+
+    cur.execute("select path from papers where paper_id = ?", [paperid])
+    path = cur.fetchone()[0]
+
+    cur.execute("delete from papers where paper_id = ?", [paperid])
+    conn.commit()
+    conn.close()
+
+    return path
+
 def get_cats():
     """ Returns a list of all categories in database
     """
