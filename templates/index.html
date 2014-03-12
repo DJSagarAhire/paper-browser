@@ -16,8 +16,9 @@
       <td>{{paper.year}}</td>
       <td>{{paper.notes}}</td>
       <td align="center">
-	<img src="{{url_for('static', filename='images/Edit.png')}}" width=24 height=24 /> 
-	<a href="{{url_for('delete')}}?paperid={{paper.paperid}}"><img src="{{url_for('static', filename='images/Delete.png')}}"  width=24 height=24 onclick="return confirm('Are you sure you want to delete the paper? This action cannot be undone.')" />
+	<i class="fa fa-pencil fa-lg"></i>
+	<!--<img src="{{url_for('static', filename='images/Edit.png')}}" width=24 height=24 /> -->
+	<a class="icon-anchor" href="{{url_for('delete')}}?paperid={{paper.paperid}}"><i class="fa fa-trash-o fa-lg" onclick="return confirm('Are you sure you want to delete the paper? This action cannot be undone.')"></i></a>
       </td>
     </tr>
   {% endfor %}
